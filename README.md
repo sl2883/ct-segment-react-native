@@ -1,7 +1,27 @@
 ##### Integrating a React Native app with Segment & then with CleverTap
 
-## Step 1: Segment in RN app
+## Step 1: Segment in React Native app
 To get started with Segment, follow [this](https://segment.com/docs/connections/sources/catalog/libraries/mobile/react-native/)
+
+* Add the segment dependency 
+```javascript
+yarn add @segment/analytics-react-native
+```
+
+* Import the analytics class object wherever you wish to connect to segment backend
+```javascript
+import analytics from '@segment/analytics-react-native'
+```
+
+* Setup and add segment events
+```javascript
+await analytics.setup('YOUR_WRITE_KEY', {
+  // Record screen views automatically!
+  recordScreenViews: true,
+  // Record certain application events automatically!
+  trackAppLifecycleEvents: true
+})
+```
 
 > Remember to replace YOUR_WRITE_KEY with your own Segment Write Key
 
