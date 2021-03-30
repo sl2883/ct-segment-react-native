@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import analytics from '@segment/analytics-react-native'
+
 import {
   View,
   Text, 
@@ -11,8 +13,14 @@ class App extends Component {
     this.state = {};
   }
 
-  componentDidMount = () => {
+  componentDidMount = async () => {
     // initial method
+	await analytics.setup('c1JWfN5OsNM4GejlnNmDKi6hveyPb7zC', {
+		// Record screen views automatically!
+		recordScreenViews: true,
+		// Record certain application events automatically!
+		trackAppLifecycleEvents: true
+	  })
   };
 
   render() {
