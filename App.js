@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import analytics from '@segment/analytics-react-native'
+import CleverTap from '@segment/analytics-react-native-clevertap'
 
 import {
   View,
   Text, 
-  StyleSheet
+  StyleSheet,
+  Button
 } from 'react-native';
 
 class App extends Component {
@@ -19,14 +21,44 @@ class App extends Component {
 		// Record screen views automatically!
 		recordScreenViews: true,
 		// Record certain application events automatically!
-		trackAppLifecycleEvents: true
+		trackAppLifecycleEvents: true,
+		using : [CleverTap]
 	  })
   };
+
+productViewed = (e) => {
+	console.log('viewed');
+	analytics.track('Product viewed', {
+		'name': 'Sword of Heracles',
+		'eventId': '1234'
+  	});
+}
+
+productPurchased = (e) => {
+
+	console.log('purchased');
+	analytics.track('Product purchased', {
+		'name': 'Sword of Heracles',
+		'eventId': '1234'
+  	});
+}
+
+
 
   render() {
     return (
       <View>
         <Text>Test</Text>
+		<Button
+			onPress={this.productViewed}
+			title="Product View"
+			color="#841584"
+			/>
+		<Button
+			onPress={this.productPurchased}
+			title="Product Purchased"
+			color="#FF9900"
+			/>
       </View>
     );
   }
