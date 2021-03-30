@@ -1,5 +1,8 @@
 PODS:
+  - Analytics (4.1.3)
   - boost-for-react-native (1.63.0)
+  - CleverTap-iOS-SDK (3.9.2):
+    - SDWebImage (~> 5.1)
   - DoubleConversion (1.1.6)
   - EXApplication (2.4.1):
     - UMCore
@@ -284,12 +287,26 @@ PODS:
     - React-Core (= 0.63.4)
     - React-cxxreact (= 0.63.4)
     - React-jsi (= 0.63.4)
+  - RNAnalytics (1.4.3):
+    - Analytics
+    - React-Core
+  - RNAnalyticsIntegration-CleverTap (1.2.1):
+    - Analytics
+    - React
+    - RNAnalytics
+    - Segment-CleverTap
   - RNGestureHandler (1.8.0):
     - React
   - RNReanimated (1.13.3):
     - React-Core
   - RNScreens (2.15.2):
     - React-Core
+  - SDWebImage (5.10.4):
+    - SDWebImage/Core (= 5.10.4)
+  - SDWebImage/Core (5.10.4)
+  - Segment-CleverTap (1.1.8):
+    - Analytics
+    - CleverTap-iOS-SDK (~> 3.9.1)
   - UMAppLoader (1.4.0)
   - UMBarCodeScannerInterface (5.4.0)
   - UMCameraInterface (5.4.0)
@@ -351,6 +368,8 @@ DEPENDENCIES:
   - React-RCTText (from `../node_modules/react-native/Libraries/Text`)
   - React-RCTVibration (from `../node_modules/react-native/Libraries/Vibration`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
+  - "RNAnalytics (from `../node_modules/@segment/analytics-react-native`)"
+  - "RNAnalyticsIntegration-CleverTap (from `../node_modules/@segment/analytics-react-native-clevertap`)"
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
@@ -371,7 +390,11 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
+    - Analytics
     - boost-for-react-native
+    - CleverTap-iOS-SDK
+    - SDWebImage
+    - Segment-CleverTap
 
 EXTERNAL SOURCES:
   DoubleConversion:
@@ -452,6 +475,10 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/Libraries/Vibration"
   ReactCommon:
     :path: "../node_modules/react-native/ReactCommon"
+  RNAnalytics:
+    :path: "../node_modules/@segment/analytics-react-native"
+  RNAnalyticsIntegration-CleverTap:
+    :path: "../node_modules/@segment/analytics-react-native-clevertap"
   RNGestureHandler:
     :path: "../node_modules/react-native-gesture-handler"
   RNReanimated:
@@ -488,7 +515,9 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
 SPEC CHECKSUMS:
+  Analytics: 4c01e3e19d4be86705bad6581a1c2aa5a15a9d22
   boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
+  CleverTap-iOS-SDK: 348167628e6bf8f784b003b15abc0c872d346a55
   DoubleConversion: cde416483dac037923206447da6e1454df403714
   EXApplication: e3c201e7b913d081bbd37bd3c5d0e2cdc21733b4
   EXConstants: 54d0bf04319d1692c6c7bc03ca151ef7a71705a4
@@ -528,9 +557,13 @@ SPEC CHECKSUMS:
   React-RCTText: 5c51df3f08cb9dedc6e790161195d12bac06101c
   React-RCTVibration: ae4f914cfe8de7d4de95ae1ea6cc8f6315d73d9d
   ReactCommon: 73d79c7039f473b76db6ff7c6b159c478acbbb3b
+  RNAnalytics: 43a09152058061b4096eb6cb806093e7b772b1e5
+  RNAnalyticsIntegration-CleverTap: 338f37e936cfa139bbd6fe34390a15ebbd1e1858
   RNGestureHandler: 7a5833d0f788dbd107fbb913e09aa0c1ff333c39
   RNReanimated: 514a11da3a2bcc6c3dfd9de32b38e2b9bf101926
   RNScreens: 3d682bcaba69a4f8e55543d90818704f34338db1
+  SDWebImage: c666b97e1fa9c64b4909816a903322018f0a9c84
+  Segment-CleverTap: c44b3c6408f4281a2bf0393242e05e98fa797464
   UMAppLoader: 92d044af52626af3d81a69796ad666fc7a9a7d78
   UMBarCodeScannerInterface: 3f6c1b09ef4b867ce752b8c0b3893bcf9cd85f32
   UMCameraInterface: d516032121192fee9a6c93bdfff0bb2cc7282796
