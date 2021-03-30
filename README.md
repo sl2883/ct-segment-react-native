@@ -29,3 +29,6 @@ Get CleverTap's Segment React Native SDK
 Make sure to run 
 > pod install
 in the ios folder
+
+##### Example and expansive use
+>  [CT Example](https://github.com/jaysmehta/CleverTapSegmentReactNative/blob/master/App.js)
