@@ -24,3 +24,8 @@ Get CleverTap's Segment React Native SDK
 
 ##### Ensure CleverTap gets the event
 > In CleverTap dashboard, Event analysis of the sent event must show > 0 events
+
+##### For iOS
+Make sure to run 
+> pod install
+in the ios folder
