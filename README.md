@@ -53,22 +53,22 @@ await analytics.setup('YOUR_WRITE_KEY', {
 ```
 
 ## Validation
-* Ensure that segment is getting the data
+##### Ensure that segment is getting the data
 After you launch your app and perform some actions
 
-1. Go to Segment -> Source -> <YOUR_SOURCE_CONNECTION> -> Debugger
-2. You must now be getting the events in Segment
+* Go to Segment -> Source -> <YOUR_SOURCE_CONNECTION> -> Debugger
+* You must now be getting the events in Segment
 ![Events in Segment](https://github.com/sl2883/ct-segment-react-native/blob/main/images/appTosegment.png "")
 
-* Ensure that Segment is sending the events to CleverTap
-1. Go to Segment -> Destination -> <YOUR_CLEVERTAP_DESTINATION> -> Event Delivery
-2. You must see # of Events Delivered to be greater than zero
+##### Ensure that Segment is sending the events to CleverTap
+* Go to Segment -> Destination -> <YOUR_CLEVERTAP_DESTINATION> -> Event Delivery
+* You must see # of Events Delivered to be greater than zero
 ![Events to CleverTap](https://github.com/sl2883/ct-segment-react-native/blob/main/images/segmentToCT.png "")
 > If # of events is zero, check that the time range is correct
 
-* Ensure CleverTap gets the event
-1. Go to CleverTap Dashboard -> Event Analysis
-2. Query the event that was delivered from Segment in Step 1
+##### Ensure CleverTap gets the event
+* Go to CleverTap Dashboard -> Event Analysis
+* Query the event that was delivered from Segment in Step 1
 ![CleverTap Dashboard](https://github.com/sl2883/ct-segment-react-native/blob/main/images/CTdashboard.png "")
 
 
