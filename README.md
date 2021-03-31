@@ -1,7 +1,10 @@
 > Make sure you've set up Segment connections correctly -
-> Source is set to React Native app
-> Destination is set to CT with the project id and token set
-> Soruce and Destination are connected and enabled
+
+> - Source is set to React Native app
+
+> - Destination is set to CT with the project id and token set
+
+> - Soruce and Destination are connected and enabled
 
 ### Integrating a React Native app with Segment & then with CleverTap
 
