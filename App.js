@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import analytics from '@segment/analytics-react-native'
 import CleverTap from '@segment/analytics-react-native-clevertap'
 
+const CT = require('clevertap-react-native');
+
 import {
   View,
   Text, 
@@ -16,6 +18,9 @@ class App extends Component {
   }
 
   componentDidMount = async () => {
+
+	CT.setDebugLevel(3);
+	//CleverTap.createNotificationChannel("generic","generic","generic",3,true);
     // initial method
 	await analytics.setup('c1JWfN5OsNM4GejlnNmDKi6hveyPb7zC', {
 		// Record screen views automatically!

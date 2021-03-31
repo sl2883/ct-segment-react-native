@@ -10,6 +10,7 @@
   "dependencies": {
     "@segment/analytics-react-native": "^1.4.3",
     "@segment/analytics-react-native-clevertap": "^1.2.1",
+    "clevertap-react-native": "^0.5.0",
     "expo": "~40.0.0",
     "expo-splash-screen": "~0.8.0",
     "expo-status-bar": "~1.0.3",
