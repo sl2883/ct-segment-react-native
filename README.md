@@ -287,3 +287,114 @@ classpath("com.google.gms:google-services:4.3.5")
 > Make sure notification channel is updated in MyFirebaseMessagingService
 > Make sure that the same notification channel is used for sending notifications (test)
 
+<h2> Enabling Push Notifications - iOS </h2>
+
+> Make sure your minimum ios target in PodFile is 11 (need to know the ideal, but this works for me)
+
+<h3> Get you sdks </h3>
+Inside your ios folder
+
+```
+pod install
+```
+
+You may encounter this error 
+>warning: The iOS Simulator deployment target 'IPHONEOS_DEPLOYMENT_TARGET' is set to 8.0, but the range of supported deployment target versions is 9.0 to 14.4.99. (in target 'boost-for-react-native' from project 'Pods')
+
+**Fix this by adding the following piece of code inside your target in PodFile**
+```objectivec
+post_install do |installer|
+    installer.pods_project.targets.each do |target|
+      target.build_configurations.each do |config|
+        if Gem::Version.new('8.0') > Gem::Version.new(config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'])
+          config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '8.0'
+        end
+      end
+    end
+  end
+```
+
+<h3>Update your AppDelegate.m</h3>
+Imports
+
+```objectivec
+#import <CleverTap-iOS-SDK/CleverTap.h>
+#import <clevertap-react-native/CleverTapReactManager.h>
+```
+In didFinishLaunchingWithOptions
+
+```objectivec
+[self registerForPush];
+[CleverTap autoIntegrate];
+[CleverTap setDebugLevel:CleverTapLogDebug];
+[[CleverTapReactManager sharedInstance] applicationDidLaunchWithOptions:launchOptions];```
+```
+And add additional functions
+```objectivec
+-(void) registerForPush {
+    UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+    center.delegate = self;
+    [center requestAuthorizationWithOptions:(UNAuthorizationOptionSound | UNAuthorizationOptionAlert | UNAuthorizationOptionBadge) completionHandler:^(BOOL granted, NSError * _Nullable error){
+    if(!error){
+      dispatch_async(dispatch_get_main_queue(), ^{
+         [[UIApplication sharedApplication] registerForRemoteNotifications];
+      });
+    }
+    }];
+
+}
+//Device Token
+-(void) application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken{
+  NSLog(@"Device Token : %@",deviceToken);
+
+}
+-(void) application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error{
+  NSLog(@"Error %@",error.description);
+}
+
+-(BOOL)application:(UIApplication *)application willContinueUserActivityWithType:(NSString *)userActivityType{
+  
+  return TRUE;
+}
+
+//PN Delgates
+-(void) userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)(void))completionHandler{
+    
+  self.resp = response.notification.request.content.userInfo;
+  completionHandler();
+}
+-(void) userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions))completionHandler{
+    completionHandler(UNAuthorizationOptionAlert | UNAuthorizationOptionBadge | UNAuthorizationOptionSound);
+}
+```
+
+Also update your AppDelegate.h to have the right imports, variables and implementations
+
+```objectivec
+#import <Foundation/Foundation.h>
+#import <EXUpdates/EXUpdatesAppController.h>
+#import <React/RCTBridgeDelegate.h>
+#import <UIKit/UIKit.h>
+#import <UserNotifications/UserNotifications.h>
+#import <CleverTap-iOS-SDK/CleverTap.h>
+#import <clevertap-react-native/CleverTapReactManager.h>
+
+#import <UMCore/UMAppDelegateWrapper.h>
+
+@interface AppDelegate : UMAppDelegateWrapper <RCTBridgeDelegate, EXUpdatesAppControllerDelegate, UNUserNotificationCenterDelegate>
+
+@property (nonatomic, strong) UIWindow *window;
+@property (nonatomic,strong) NSDictionary *resp;
+
+@end
+```
+
+Lastly, make sure you've added the CT token & account id in your Info.plist file
+
+```json
+<key>CleverTapAccountID</key>
+<string>XXX-XX-XXX</string>
+<key>CleverTapToken</key>
+<string>XXX-XXX</string>
+```
+
