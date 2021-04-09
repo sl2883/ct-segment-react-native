@@ -122,16 +122,16 @@ pod install
 
 <h1> Enabling push notifications - Android </h1>
 
-<h3> Step 1 </h3>
+<h3> Install the clevertap-react-native module </h3>
 In your react-native app's folder
 
 ```
 npm install --save clevertap-react-native
 ```
 
-<h3> Step 2 </h3>
+<h3> Update your build.gradle to have the right dependencies </h3>
 
-2. In your android app build.gradle, add the following dependancies
+In your android app build.gradle, add the following
 ```java
     implementation 'com.clevertap.android:clevertap-android-sdk:3.6.3'
 
@@ -152,7 +152,7 @@ npm install --save clevertap-react-native
     implementation 'com.google.android.exoplayer:exoplayer-ui:2.8.4'
 ```
 
-<h3>In your App -> Main -> AndroidManifest </h3>
+<h3>In your App -> Main -> AndroidManifest file, add you clevertap account details </h3>
 
 ```javascript
 <meta-data
@@ -163,7 +163,7 @@ npm install --save clevertap-react-native
         android:value="Your CleverTap Account Token"/>
 ```
 
-<h3>And </h3>
+<h3>And permission to send data to clevertap</h3>
 
 ```javascript
 <!-- Required to allow the app to send events and user profile information -->
@@ -172,7 +172,7 @@ npm install --save clevertap-react-native
 <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 ```
 
-<h3> In your MainActivity </h3>
+<h3> In your MainActivity, enable deep links </h3>
 
 ```javascript
 import com.clevertap.react.CleverTapModule;
@@ -184,7 +184,9 @@ import com.clevertap.react.CleverTapModule;
 	}
 }
 ```
-<h3> In your MainApplication </h3> 
+<h3> In your MainApplication, initiate ActivityLifeCycle.</h3>
+
+> Need to Check - Is it required event though segment will have these?
 
 ```javascript
 import com.clevertap.android.sdk.ActivityLifecycleCallback;
@@ -204,7 +206,7 @@ import com.clevertap.android.sdk.ActivityLifecycleCallback;
   }
 ```
 
-<h3> Add MyFirebaseMessagingService class </h3>
+<h3> Add MyFirebaseMessagingService class, to send token to CT and to set channels </h3>
 
 ```javascript
 package com.second;
@@ -258,7 +260,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 //Update your channels above
 ```
 
-<h3> In your App -> Main -> Mainfest again </h3>
+<h3> In your App -> Main -> AndroidManifest, add the new service </h3>
 
 ```java
 <service android:name=".MyFirebaseMessagingService">
@@ -270,6 +272,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
 <h3> Bring your google-services.json to app folder </h3>
 
+> Make sure that your Firebase service key and token are updated in CT FCM push
 <h3> Update your app's build.gradle according to Google's integration steps</h3>
 
 ```
