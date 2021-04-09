@@ -4,6 +4,8 @@ import android.app.Application;
 import android.content.Context;
 import android.net.Uri;
 
+import com.clevertap.android.sdk.ActivityLifecycleCallback;
+
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
 import com.facebook.react.ReactInstanceManager;
@@ -77,6 +79,8 @@ public class MainApplication extends Application implements ReactApplication {
 
   @Override
   public void onCreate() {
+
+    ActivityLifecycleCallback.register(this); 
     super.onCreate();
     SoLoader.init(this, /* native exopackage */ false);
 

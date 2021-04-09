@@ -22,9 +22,10 @@ class App extends Component {
 	CT.setDebugLevel(3);
 	//CleverTap.createNotificationChannel("generic","generic","generic",3,true);
     // initial method
-	await analytics.setup('c1JWfN5OsNM4GejlnNmDKi6hveyPb7zC', {
+	await analytics.setup('8CcDL0tavqFNU0ItDxgi8P7m5dn43Bye', {
 		// Record screen views automatically!
 		recordScreenViews: true,
+		debug: true,
 		// Record certain application events automatically!
 		trackAppLifecycleEvents: true,
 		using : [CleverTap]

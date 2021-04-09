@@ -3,6 +3,9 @@ PODS:
   - boost-for-react-native (1.63.0)
   - CleverTap-iOS-SDK (3.9.2):
     - SDWebImage (~> 5.1)
+  - clevertap-react-native (0.5.0):
+    - CleverTap-iOS-SDK (~> 3.9.1)
+    - React
   - DoubleConversion (1.1.6)
   - EXApplication (2.4.1):
     - UMCore
@@ -327,6 +330,7 @@ PODS:
   - Yoga (1.14.0)
 
 DEPENDENCIES:
+  - clevertap-react-native (from `../node_modules/clevertap-react-native`)
   - DoubleConversion (from `../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec`)
   - EXApplication (from `../node_modules/expo-application/ios`)
   - EXConstants (from `../node_modules/expo-constants/ios`)
@@ -397,6 +401,8 @@ SPEC REPOS:
     - Segment-CleverTap
 
 EXTERNAL SOURCES:
+  clevertap-react-native:
+    :path: "../node_modules/clevertap-react-native"
   DoubleConversion:
     :podspec: "../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec"
   EXApplication:
@@ -518,6 +524,7 @@ SPEC CHECKSUMS:
   Analytics: 4c01e3e19d4be86705bad6581a1c2aa5a15a9d22
   boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
   CleverTap-iOS-SDK: 348167628e6bf8f784b003b15abc0c872d346a55
+  clevertap-react-native: 2ac030374ae68065b4db344f6357a60df702d117
   DoubleConversion: cde416483dac037923206447da6e1454df403714
   EXApplication: e3c201e7b913d081bbd37bd3c5d0e2cdc21733b4
   EXConstants: 54d0bf04319d1692c6c7bc03ca151ef7a71705a4
