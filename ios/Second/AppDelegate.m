@@ -19,6 +19,9 @@
 #import <SKIOSNetworkPlugin/SKIOSNetworkAdapter.h>
 #import <FlipperKitReactPlugin/FlipperKitReactPlugin.h>
 
+#import <CleverTap-iOS-SDK/CleverTap.h>
+#import <clevertap-react-native/CleverTapReactManager.h>
+
 static void InitializeFlipper(UIApplication *application) {
   FlipperClient *client = [FlipperClient sharedClient];
   SKDescriptorMapper *layoutDescriptorMapper = [[SKDescriptorMapper alloc] initWithDefaults];
@@ -56,6 +59,11 @@ static void InitializeFlipper(UIApplication *application) {
     [controller startAndShowLaunchScreen:self.window];
   #endif
 
+  [self registerForPush];
+  // integrate CleverTap SDK using the autoIntegrate option
+  [CleverTap autoIntegrate];
+  [CleverTap setDebugLevel:CleverTapLogDebug];
+  [[CleverTapReactManager sharedInstance] applicationDidLaunchWithOptions:launchOptions];
   [super application:application didFinishLaunchingWithOptions:launchOptions];
 
   return YES;
@@ -106,6 +114,42 @@ static void InitializeFlipper(UIApplication *application) {
  return [RCTLinkingManager application:application
                   continueUserActivity:userActivity
                     restorationHandler:restorationHandler];
+}
+
+-(void) registerForPush {
+    UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+    center.delegate = self;
+    [center requestAuthorizationWithOptions:(UNAuthorizationOptionSound | UNAuthorizationOptionAlert | UNAuthorizationOptionBadge) completionHandler:^(BOOL granted, NSError * _Nullable error){
+    if(!error){
+      dispatch_async(dispatch_get_main_queue(), ^{
+         [[UIApplication sharedApplication] registerForRemoteNotifications];
+      });
+    }
+    }];
+
+}
+//Device Token
+-(void) application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken{
+  NSLog(@"Device Token : %@",deviceToken);
+
+}
+-(void) application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error{
+  NSLog(@"Error %@",error.description);
+}
+
+-(BOOL)application:(UIApplication *)application willContinueUserActivityWithType:(NSString *)userActivityType{
+  
+  return TRUE;
+}
+
+//PN Delgates
+-(void) userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)(void))completionHandler{
+    
+  self.resp = response.notification.request.content.userInfo;
+  completionHandler();
+}
+-(void) userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions))completionHandler{
+    completionHandler(UNAuthorizationOptionAlert | UNAuthorizationOptionBadge | UNAuthorizationOptionSound);
 }
 
 @end

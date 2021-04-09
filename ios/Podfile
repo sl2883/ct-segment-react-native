@@ -7,7 +7,7 @@ platform :ios, '11.0'
 target 'Second' do
   use_unimodules!
   config = use_native_modules!
-
+  
   use_react_native!(:path => config["reactNativePath"])
 
   # Uncomment the code below to enable Flipper.
@@ -21,4 +21,16 @@ target 'Second' do
   #  post_install do |installer|
   #    flipper_post_install(installer)
   #  end
+
+  post_install do |installer|
+    installer.pods_project.targets.each do |target|
+      target.build_configurations.each do |config|
+        if Gem::Version.new('8.0') > Gem::Version.new(config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'])
+          config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '8.0'
+        end
+      end
+    end
+  end
+  
 end
+
