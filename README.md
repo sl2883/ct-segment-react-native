@@ -389,7 +389,7 @@ Also update your AppDelegate.h to have the right imports, variables and implemen
 @end
 ```
 
-Lastly, make sure you've added the CT token & account id in your Info.plist file
+~~ Lastly, make sure you've added the CT token & account id in your Info.plist file
 
 ```json
 <key>CleverTapAccountID</key>
@@ -397,4 +397,13 @@ Lastly, make sure you've added the CT token & account id in your Info.plist file
 <key>CleverTapToken</key>
 <string>XXX-XXX</string>
 ```
+ ~~
 
+## Notes to self
+
+- To run the react native project on iOS device
+```
+react-native run-ios --device
+```
+
+- If you get aps-entitlement error, check that Signing and capabilities have the "Background mode" and "push notification"
