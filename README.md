@@ -389,7 +389,7 @@ Also update your AppDelegate.h to have the right imports, variables and implemen
 @end
 ```
 
-~~ Lastly, make sure you've added the CT token & account id in your Info.plist file
+~~Lastly, make sure you've added the CT token & account id in your Info.plist file~~
 
 ```json
 <key>CleverTapAccountID</key>
@@ -397,7 +397,7 @@ Also update your AppDelegate.h to have the right imports, variables and implemen
 <key>CleverTapToken</key>
 <string>XXX-XXX</string>
 ```
- ~~
+
 
 ## Notes to self
 
